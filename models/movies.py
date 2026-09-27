@@ -29,6 +29,7 @@ class Movies(models.Model):
         ('4', '4 Star'),
         ('5', '5 Star'),
     ], string='Rating', default='0', tracking=True)
+    source = fields.Char(string='Source', tracking=True)
 
     def unlink(self):
         for record in self:

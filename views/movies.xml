@@ -29,6 +29,7 @@
         <field name="watched"/>
         <field name="date_watched"/>
         <field name="rating" widget="priority"/>
+        <field name="source"/>
         <field
             name="image"
             widget="image"
@@ -75,6 +76,7 @@
 
           <group>
             <field name="description"/>
+            <field name="source"/>
           </group>
         </sheet>
       <!-- Chatter -->
