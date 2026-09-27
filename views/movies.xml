@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+    <!-- List View -->
+    <record id="movie_list_view" model="ir.ui.view">
+        <field name="name">movies.movies.list</field>
+        <field name="model">movies.movies</field>
+
+        <field name="arch" type="xml">
+            <list string="Movie List">
+              <header>
+                  <button
+                      name="action_mark_watched"
+                      type="object"
+                      string="Mark as Watched"
+                      class="btn-primary"
+                  />
+                  <button
+                      name="action_mark_unwatched"
+                      type="object"
+                      string="Mark as Unwatched"
+                      />
+              </header>
+              <field name="name" string="Movie Title"/>
+              <field name="description" optional="hide"/>
+              <field name="release_date"/>
+              <field name="watched"/>
+              <field name="date_watched"/>
+              <field name="rating" widget="priority"/>
+              <field
+                  name="image"
+                  widget="image"
+                  options="{'size': [50, 75]}"
+                  />
+            </list>
+        </field>
+    </record>
+
+
+    <!-- Form View -->
+    <record id="movie_form_view" model="ir.ui.view">
+        <field name="name">movies.movies.form</field>
+        <field name="model">movies.movies</field>
+
+        <field name="arch" type="xml">
+            <form string="Movie">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field
+                                name="name"
+                                placeholder="Movie Title"
+                            />
+                        </h1>
+                    </div>
+
+                    <group>
+                        <group>
+                            <field name="release_date"/>
+                            <field name="rating" widget="priority"/>
+                            <field name="watched"/>
+                            <field name="date_watched"/>
+                        </group>
+
+                        <group>
+                            <field
+                                name="image"
+                                widget="image"
+                            />
+                        </group>
+                    </group>
+
+                    <group>
+                        <field name="description"/>
+                    </group>
+
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_movies" model="ir.actions.act_window">
+        <field name="name">Movies</field>
+        <field name="res_model">movies.movies</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Root Menu -->
+    <menuitem
+        id="menu_movies_root"
+        name="Movies"
+        sequence="10"
+    />
+
+    <!-- Sub Menu -->
+    <menuitem
+        id="menu_movies"
+        name="Movie List"
+        parent="menu_movies_root"
+        action="action_movies"
+        sequence="10"
+    />
+
+</odoo>
