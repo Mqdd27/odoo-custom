@@ -25,6 +25,7 @@
         <field name="name" string="Movie Title"/>
         <field name="description" optional="hide"/>
         <field name="release_date"/>
+        <field name="watch_status"/>
         <field name="watched"/>
         <field name="date_watched"/>
         <field name="rating" widget="priority"/>
@@ -59,7 +60,7 @@
             <group>
               <field name="release_date"/>
               <field name="rating" widget="priority"/>
-              <field name="watched"/>
+              <field name="watched" attrs="{'invisible': {'watch_status', '!=', 'completed'}}"/>
               <field name="date_watched"/>
             </group>
 
