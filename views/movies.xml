@@ -61,7 +61,7 @@
               <field name="release_date"/>
               <field name="rating" widget="priority"/>
               <field name="watch_status"/>
-              <field name="watched" attrs="{'invisible': 'watch_status', '!=', 'completed'}" />
+              <field name="watched" invisible="watch_status != 'completed'"/>
               <field name="date_watched"/>
             </group>
 
