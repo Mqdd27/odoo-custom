@@ -13,6 +13,7 @@
     "data": [
         "security/ir.model.access.csv",
         "views/movies.xml",
+        "views/subscription.xml",
     ],
 
     "installable": True,

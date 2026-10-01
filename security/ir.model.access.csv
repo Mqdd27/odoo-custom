@@ -1,2 +1,6 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_movies_movies,movies.movies,model_movies_movies,base.group_user,1,1,1,1
+access_subscription_subscription,subscription.subscription,model_subscription_subscription,base.group_user,1,1,1,1
+access_subscription_line,subscription.line,model_subscription_line,base.group_user,1,1,1,1
+access_subscription_service,subscription.service,model_subscription_service,base.group_user,1,1,1,1
+access_subscription_category,subscription.category,model_subscription_category,base.group_user,1,1,1,1

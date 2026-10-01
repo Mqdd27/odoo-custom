@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+  <!-- Category -->
+  <record id="subscription_category_list_view" model="ir.ui.view">
+    <field name="name">subscription.category.list</field>
+    <field name="model">subscription.category</field>
+    <field name="arch" type="xml">
+      <list string="Categories" editable="bottom">
+        <field name="name"/>
+        <field name="active" widget="boolean_toggle"/>
+      </list>
+    </field>
+  </record>
+
+  <record id="subscription_category_form_view" model="ir.ui.view">
+    <field name="name">subscription.category.form</field>
+    <field name="model">subscription.category</field>
+    <field name="arch" type="xml">
+      <form string="Category">
+        <sheet>
+          <group>
+            <field name="name"/>
+            <field name="active"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_subscription_category" model="ir.actions.act_window">
+    <field name="name">Categories</field>
+    <field name="res_model">subscription.category</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+
+  <!-- Service -->
+  <record id="subscription_service_list_view" model="ir.ui.view">
+    <field name="name">subscription.service.list</field>
+    <field name="model">subscription.service</field>
+    <field name="arch" type="xml">
+      <list string="Services">
+        <field name="logo" widget="image" options="{'size': [32, 32]}"/>
+        <field name="name"/>
+        <field name="category_id"/>
+        <field name="website" widget="url"/>
+      </list>
+    </field>
+  </record>
+
+  <record id="subscription_service_form_view" model="ir.ui.view">
+    <field name="name">subscription.service.form</field>
+    <field name="model">subscription.service</field>
+    <field name="arch" type="xml">
+      <form string="Service">
+        <sheet>
+          <field name="logo" widget="image" class="oe_avatar"/>
+          <div class="oe_title">
+            <h1>
+              <field name="name" placeholder="e.g. Netflix"/>
+            </h1>
+          </div>
+          <group>
+            <field name="category_id"/>
+            <field name="website" widget="url"/>
+            <field name="active"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_subscription_service" model="ir.actions.act_window">
+    <field name="name">Services</field>
+    <field name="res_model">subscription.service</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+
+  <!-- Subscription -->
+  <record id="subscription_list_view" model="ir.ui.view">
+    <field name="name">subscription.subscription.list</field>
+    <field name="model">subscription.subscription</field>
+    <field name="arch" type="xml">
+      <list string="Subscriptions">
+        <field name="name"/>
+        <field name="total_subscriptions"/>
+        <field name="currency_id" column_invisible="1"/>
+        <field name="total_expenses"/>
+      </list>
+    </field>
+  </record>
+
+  <record id="subscription_form_view" model="ir.ui.view">
+    <field name="name">subscription.subscription.form</field>
+    <field name="model">subscription.subscription</field>
+    <field name="arch" type="xml">
+      <form string="Subscription">
+        <sheet>
+          <div class="oe_title">
+            <h1>
+              <field name="name"/>
+            </h1>
+          </div>
+          <group>
+            <group>
+              <field name="currency_id"/>
+            </group>
+            <group>
+              <field name="total_subscriptions"/>
+              <field name="total_expenses"/>
+            </group>
+          </group>
+          <field name="subscription_line">
+            <list editable="bottom">
+              <field name="service_id"/>
+              <field name="subscription_type"/>
+              <field name="start_date"/>
+              <field
+                  name="expiry_date"
+                  invisible="subscription_type == 'lifetime'"
+                  required="subscription_type != 'lifetime'"
+                  />
+              <field
+                  name="status"
+                  widget="badge"
+                  decoration-success="status == 'active'"
+                  decoration-muted="status == 'inactive'"
+                  decoration-danger="status == 'expired'"
+                  />
+              <field name="currency_id" column_invisible="1"/>
+              <field name="price" sum="Total"/>
+            </list>
+          </field>
+        </sheet>
+        <chatter/>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_subscription" model="ir.actions.act_window">
+    <field name="name">My Subscriptions</field>
+    <field name="res_model">subscription.subscription</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+
+  <!-- Menus -->
+  <menuitem
+      id="menu_subscription_root"
+      name="Subscriptions"
+      sequence="20"
+      />
+
+  <menuitem
+      id="menu_subscription"
+      name="My Subscriptions"
+      parent="menu_subscription_root"
+      action="action_subscription"
+      sequence="10"
+      />
+
+  <menuitem
+      id="menu_subscription_service"
+      name="Services"
+      parent="menu_subscription_root"
+      action="action_subscription_service"
+      sequence="20"
+      />
+
+  <menuitem
+      id="menu_subscription_config"
+      name="Configuration"
+      parent="menu_subscription_root"
+      sequence="100"
+      />
+
+  <menuitem
+      id="menu_subscription_category"
+      name="Categories"
+      parent="menu_subscription_config"
+      action="action_subscription_category"
+      sequence="10"
+      />
+
+</odoo>
